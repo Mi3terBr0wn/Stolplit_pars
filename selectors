@@ -1,0 +1,8 @@
+element1 = art_soup.select_one(
+            'body > div.site-wrapper > div.site-content > div > div.page--product-detail > div.grid.grid--product > div.grid--productinfo > div > div.tabwrapper > div.tabcontent.tabcontent--active > div > div.characteristicsleft > div.table.table-params > div:nth-child(1) > div:nth-child(2) > div.table--td.js-product-article > div').text.strip()
+element2 = art_soup.select_one(
+            'body > div.site-wrapper > div.site-content > div > div.page--product-detail > div.grid.grid--product > div.grid--productinfo > div > div.tabwrapper > div.tabcontent.tabcontent--active > div > div.characteristicsleft > div.table.table-params > div:nth-child(2) > div > div:nth-child(2) > div').text.strip()
+element3 = art_soup.select_one(
+            'body > div.site-wrapper > div.site-content > div > div.page--product-detail > div.grid.grid--product > div.grid--productinfo > div > div.tabwrapper > div.tabcontent.tabcontent--active > div > div.characteristicsleft > div.table.table-params > div:nth-child(2) > div > div:nth-child(2) > div').text.strip()
+element4 = art_soup.select_one(
+            'body > div.site-wrapper > div.site-content > div > div.page--product-detail > div.grid.grid--product > div.grid--productinfo > div > div.tabwrapper > div.tabcontent.tabcontent--active > div > div.characteristicsleft > div.table.table-params > div:nth-child(2) > div > div:nth-child(2) > div').text.strip()
