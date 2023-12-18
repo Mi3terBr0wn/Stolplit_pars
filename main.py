@@ -18,7 +18,8 @@ for i in range(1, 15):
     url = 'https://www.stolplit.ru/supplier/E1-138/?PAGEN_1=' + str(i)
     # настройка веб драйвера селениум
     options = webdriver.ChromeOptions()
-    options.add_argument("--headless")  # Run Chrome in headless mode
+    options.add_argument("--headless")
+    # Run Chrome in headless mode
     driver = webdriver.Chrome(options=options)
 
     # получение содержимого страницы
@@ -38,7 +39,7 @@ for i in range(1, 15):
         for link in link_list:
             file.write('https://www.stolplit.ru/' + link['href'] + '\n')
         # закрытие записи в файл
-        href_list.close()
+        file.close()
 '''
 
 # открытие для чтения файла со ссылками
@@ -72,13 +73,20 @@ for line in href_list:
         element1 = art_soup.find('div', {'class': 'table--td js-product-article'}).get_text(strip=True)
 
         # сделать трай кэтч блок
-        size_element = art_soup.select_one('body > div.site-wrapper > div.site-content > div > div.page--product-detail > div.grid.grid--product > div.grid--product__info > div > div.tab__wrapper > div.tab__content.tab__content--active > div > div.characteristics__left > div.table.table-params > div:nth-child(2) > div > div:nth-child(2) > div').text.strip()
-        # size_element = art_soup.select_one('body > div.site-wrapper > div.site-content > div > div.page--product-detail > div.grid.grid--product > div.grid--product__info > div > div.tab__wrapper > div > div > div > b > b > b > div > div:nth-child(2) > div > div:nth-child(2) > div').text.strip()
+        try:
+            size_element = art_soup.select_one('body > div.site-wrapper > div.site-content > div > div.page--product-detail > div.grid.grid--product > div.grid--product__info > div > div.tab__wrapper > div.tab__content.tab__content--active > div > div.characteristics__left > div.table.table-params > div:nth-child(2) > div > div:nth-child(2) > div').text.strip()
+            # size_element = art_soup.select_one('body > div.site-wrapper > div.site-content > div > div.page--product-detail > div.grid.grid--product > div.grid--product__info > div > div.tab__wrapper > div > div > div > b > b > b > div > div:nth-child(2) > div > div:nth-child(2) > div').text.strip()
 
-        # Запишите ссылку и извлеченные элементы в выходной файл
-        with open('art_info_list.txt', 'a') as file:
-            #file.write(f'{href.strip()} {size_element}\n')
-            file.write(f'{href.strip()} {element1} {size_element}\n')
+            # Запишите ссылку и извлеченные элементы в выходной файл
+            with open('art_info_list.txt', 'a') as file:
+                #file.write(f'{href.strip()} {size_element}\n')
+                file.write(f'{href.strip()} {element1} {size_element}\n')
+        except Exception:
+            # Запишите ссылку пометку об ошибке
+            with open('art_info_list.txt', 'a') as file:
+                # file.write(f'{href.strip()} {size_element}\n')
+                ex_el = 'нет данных'
+                file.write(f'{href.strip()} {ex_el}\n')
 
     # Закройте выходной файл и веб-драйвер
     output_file.close()
